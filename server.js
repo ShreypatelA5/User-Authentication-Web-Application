@@ -4,7 +4,7 @@ const app = express();
 const path = require("path");
 const bcrypt = require("bcrypt");
 
-const saltRounds = 10; 
+const checkRounds = 10; 
 
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({ extended: true }));
@@ -16,7 +16,7 @@ app.get("/", (req, res) => {
 
 // get "/user" route
 app.get("/user", (req, res) => {
-  const { username, password } = req.query;
+  const { clientusername, clientpassword } = req.query;
   res.send(`
     <html>
       <head>
@@ -40,20 +40,19 @@ app.get("/user", (req, res) => {
       <body>
         <h1>Welcome to the Login Page</h1>
         <h1>Here is the information of Login ID and Password </h1>
-        <p>Your User name is: <strong>${username}</strong></p>
-        <p>Your encrypted password is: <strong>${password}</strong></p>
+        <p>Your User name is: <strong>${clientusername}</strong></p>
+        <p>Your encrypted password is: <strong>${clientpassword}</strong></p>
       </body>
     </html>
   `);
 });
 
-
 // get "/login" route
 app.post("/login", (req, res) => {
-  const { username, password } = req.body;
-  if (username && password) {
-    const hash = bcrypt.hashSync(password, saltRounds);
-    res.redirect(`/user?username=${username}&password=${hash}`);
+  const { clientusername, clientpassword } = req.body;
+  if (clientusername && clientpassword) {
+    const hash = bcrypt.hashSync(password, checkRounds);
+    res.redirect(`/user?username=${clientusername}&password=${hash}`);
   } else {
     res.redirect("/");
   }
