@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/ShreypatelA5/Web322-T6/issues"
   },
-  "homepage": "https://github.com/ShreypatelA5/Web322-T6#readme"
+  "homepage": "https://github.com/ShreypatelA5/Web322-T6#readme",
+  "dependencies": {
+    "bcrypt": "^5.1.0"
+  }
 }
